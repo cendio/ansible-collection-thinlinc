@@ -1,0 +1,8 @@
+---
+- name: Disable compositing (MATE)
+  ansible.builtin.template:
+    src: mate/disable_compositing.j2
+    dest: /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override
+    mode: '0644'
+  notify: compile_gsettings_schemas
+  when: "'mate' in desktop_envs"

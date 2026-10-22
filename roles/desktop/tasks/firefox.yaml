@@ -1,0 +1,38 @@
+---
+- name: Remove Firefox snap
+  community.general.snap:
+    name: firefox
+    state: absent
+
+- name: Remove Firefox transitional package
+  become: true
+  ansible.builtin.apt:
+    name: firefox
+    state: absent
+
+- name: Add Mozilla repository
+  ansible.builtin.deb822_repository:
+    name: mozilla
+    types: [deb]
+    uris: "https://packages.mozilla.org/apt"
+    suites: [mozilla]
+    components: [main]
+    signed_by: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
+    enabled: true
+    state: present
+
+- name: Pin Mozilla packages
+  ansible.builtin.copy:
+    content: |
+      Package: *
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
+    dest: /etc/apt/preferences.d/mozilla
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Install Firefox
+  ansible.builtin.apt:
+    name: firefox
+    update_cache: true

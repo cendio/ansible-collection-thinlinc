@@ -1,0 +1,19 @@
+---
+# Paths are a superset of the defaults in RHEL, Debian, and SUSE, so should
+# be fine on all three distribution families.
+- name: Ensure ThinLinc commands work with sudo
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/thinlinc
+    content: |
+      Defaults secure_path="{{ [
+        '/usr/local/sbin',
+        '/usr/local/bin',
+        '/usr/sbin',
+        '/usr/bin',
+        '/sbin',
+        '/bin',
+        '/opt/thinlinc/bin',
+        '/opt/thinlinc/sbin'
+      ] | join(':') }}"
+    mode: "0440"
+    validate: /usr/sbin/visudo -cf %s

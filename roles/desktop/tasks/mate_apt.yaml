@@ -1,0 +1,21 @@
+---
+- name: Install MATE desktop packages
+  ansible.builtin.apt:
+    name: ubuntu-mate-desktop
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+# mate-power-manager just crashes on a headless remote session.
+#
+# Using dpkg-divert here is more effective than just removing/editing the
+# .desktop file, since it won't be replaced/overwritten on an update. Removing
+# mate-power-manager would involve removing the ubuntu-mate-desktop metapackage
+# as well, which means we'd miss out on any updates it provides.
+#
+# On RPM-based systems, there is no meta package or group install target, so
+# we're installing all the packages manually anyway; we just don't install
+# mate-power-manager to begin with.
+- name: Disable mate-power-manager autostart
+  community.general.dpkg_divert:
+    path: /etc/xdg/autostart/mate-power-manager.desktop
+    state: present
+    rename: true

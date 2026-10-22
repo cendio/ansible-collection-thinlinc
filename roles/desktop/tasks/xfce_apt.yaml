@@ -1,0 +1,12 @@
+---
+- name: Install XFCE desktop packages
+  ansible.builtin.apt:
+    name: xubuntu-desktop
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+# Magnus (a desktop magnifier application) has a habit of autostarting
+# unconditionally on XFCE
+- name: Remove Magnus
+  ansible.builtin.apt:
+    name: magnus
+    state: absent

@@ -1,0 +1,17 @@
+---
+- name: Enable CRB/EPEL
+  ansible.builtin.include_role:                    
+    name: cendio.thinlinc.common
+    tasks_from: epel.yaml
+
+- name: Install XFCE desktop packages
+  ansible.builtin.dnf:
+    name: "@Xfce"
+    state: present
+
+# Magnus (a desktop magnifier application) has a habit of autostarting
+# unconditionally on XFCE
+- name: Remove Magnus
+  ansible.builtin.dnf:
+    name: magnus
+    state: absent

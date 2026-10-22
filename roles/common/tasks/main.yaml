@@ -1,0 +1,15 @@
+---
+- name: Enable CRB/EPEL (dnf)
+  ansible.builtin.include_tasks: epel.yaml
+  when: ansible_facts['pkg_mgr'] == "dnf"
+
+- name: Install required packages and services (dnf)
+  ansible.builtin.include_tasks: packages_dnf.yaml
+  when: ansible_facts['pkg_mgr'] == "dnf"
+
+- name: Install required packages and services (apt)
+  ansible.builtin.include_tasks: packages_apt.yaml
+  when: ansible_facts['pkg_mgr'] == "apt"
+
+- name: Enable sudo
+  ansible.builtin.include_tasks: sudo.yaml

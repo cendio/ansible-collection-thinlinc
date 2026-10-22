@@ -1,0 +1,10 @@
+---
+namespace: cendio
+name: thinlinc
+version: 0.1.0
+readme: README.md
+authors:
+  - Aaron Sowry <aaron@cendio.com>
+description: Perform common best-practice tasks when configuring ThinLinc servers.
+license:
+  - GPL-3.0-or-later

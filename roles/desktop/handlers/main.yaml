@@ -1,0 +1,6 @@
+---
+- name: Compile gsettings schemas
+  ansible.builtin.command: |
+    /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas/
+  listen: compile_gsettings_schemas
+  changed_when: true

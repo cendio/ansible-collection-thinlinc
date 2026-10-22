@@ -1,0 +1,50 @@
+---
+- name: Validate requested desktop environments
+  ansible.builtin.assert:
+    that:
+      - desktop_envs is defined
+      - desktop_envs | length > 0
+      - desktop_envs | difference(supported_envs) | length == 0
+    fail_msg: >-
+      desktop_envs must be a non-empty list of desktop environments.
+      Currently supported: {{ supported_envs }}
+  vars:
+    supported_envs:
+      - mate
+      - xfce
+
+- name: Install MATE desktop (apt)
+  ansible.builtin.include_tasks: mate_apt.yaml
+  when:
+    - "'mate' in desktop_envs"
+    - ansible_facts['pkg_mgr'] == "apt"
+
+- name: Install MATE desktop (dnf)
+  ansible.builtin.include_tasks: mate_dnf.yaml
+  when:
+    - "'mate' in desktop_envs"
+    - ansible_facts['pkg_mgr'] == "dnf"
+
+- name: Install XFCE desktop (apt)
+  ansible.builtin.include_tasks: xfce_apt.yaml
+  when:
+    - "'xfce' in desktop_envs"
+    - ansible_facts['pkg_mgr'] == "apt"
+
+- name: Install XFCE desktop (dnf)
+  ansible.builtin.include_tasks: xfce_dnf.yaml
+  when:
+    - "'xfce' in desktop_envs"
+    - ansible_facts['pkg_mgr'] == "dnf"
+
+- name: Replace Firefox snap package
+  ansible.builtin.include_tasks: firefox.yaml
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Disable screensaver
+  ansible.builtin.include_tasks: screensaver.yaml
+
+- name: Disable compositing
+  ansible.builtin.include_tasks: compositing.yaml
+
+# FIXME: do we still need the Polkit rules for preventing colord popups?
