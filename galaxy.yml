@@ -1,7 +1,7 @@
 ---
 namespace: cendio
 name: thinlinc
-version: 0.1.0
+version: 0.1.1
 readme: README.md
 authors:
   - Aaron Sowry <aaron@cendio.com>
