@@ -1,0 +1,14 @@
+---
+- name: Configure VirtualGL repository (apt)
+  ansible.builtin.deb822_repository:
+    name: virtualgl
+    types: deb
+    uris: https://packagecloud.io/dcommander/virtualgl/any/
+    suites: any
+    components: main
+    signed_by: https://packagecloud.io/dcommander/virtualgl/gpgkey
+
+- name: Install VirtualGL (apt)
+  ansible.builtin.apt:
+    name: virtualgl
+    update_cache: true

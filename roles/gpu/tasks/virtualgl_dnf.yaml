@@ -1,0 +1,18 @@
+---
+- name: Configure VirtualGL repository (dnf)
+  ansible.builtin.yum_repository:
+    name: VirtualGL
+    description: VirtualGL official RPMs
+    baseurl: https://packagecloud.io/dcommander/virtualgl/rpm_any/rpm_any/$basearch
+    gpgcheck: true
+    repo_gpgcheck: true
+    gpgkey:
+      - https://packagecloud.io/dcommander/virtualgl/gpgkey
+      - https://raw.githubusercontent.com/VirtualGL/repo/main/VGL-GPG-KEY
+    enabled: true
+    sslverify: true
+
+- name: Install VirtualGL (dnf)
+  ansible.builtin.dnf:
+    name: VirtualGL
+    update_cache: true

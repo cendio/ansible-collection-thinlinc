@@ -39,6 +39,7 @@ ansible-galaxy collection install git+https://github.com/cendio/ansible-collecti
   hosts: thinlinc_agents
   become: true
   roles:
+    - cendio.thinlinc.gpu
     - role: cendio.thinlinc.desktop
       vars:
         desktop_envs: ["mate"]
@@ -50,6 +51,7 @@ ansible-galaxy collection install git+https://github.com/cendio/ansible-collecti
 |------|-------------|
 | [common](roles/common/README.md) | Tasks which are generally useful for all ThinLinc servers |
 | [desktop](roles/desktop/README.md) | Installs and configures supported desktop environments |
+| [gpu](roles/gpu/README.md) | Configures ThinLinc servers for use with a GPU |
 
 ## License
 

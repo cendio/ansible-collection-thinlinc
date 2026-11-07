@@ -1,0 +1,16 @@
+---
+- name: Install VirtualGL (apt)
+  become: true
+  ansible.builtin.include_tasks: virtualgl_apt.yaml
+  when: ansible_facts['pkg_mgr'] == "apt"
+
+- name: Install VirtualGL (dnf)
+  become: true
+  ansible.builtin.include_tasks: virtualgl_dnf.yaml
+  when: ansible_facts['pkg_mgr'] == "dnf"
+
+- name: Configure VirtualGL
+  become: true
+  ansible.builtin.command: /usr/bin/vglserver_config +egl +f
+  args:
+    creates: /etc/modprobe.d/virtualgl.conf
