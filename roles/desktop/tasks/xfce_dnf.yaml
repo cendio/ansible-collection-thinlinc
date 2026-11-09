@@ -1,6 +1,6 @@
 ---
 - name: Enable CRB/EPEL
-  ansible.builtin.include_role:                    
+  ansible.builtin.include_role:
     name: cendio.thinlinc.common
     tasks_from: epel.yaml
 
