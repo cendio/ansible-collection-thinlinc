@@ -1,15 +1,6 @@
 ---
-- name: Enable CRB/EPEL (dnf)
-  ansible.builtin.include_tasks: epel.yaml
-  when: ansible_facts['pkg_mgr'] == "dnf"
+- name: Install and enable CUPS
+  ansible.builtin.include_tasks: cups.yaml
 
-- name: Install required packages and services (dnf)
-  ansible.builtin.include_tasks: packages_dnf.yaml
-  when: ansible_facts['pkg_mgr'] == "dnf"
-
-- name: Install required packages and services (apt)
-  ansible.builtin.include_tasks: packages_apt.yaml
-  when: ansible_facts['pkg_mgr'] == "apt"
-
-- name: Enable sudo
+- name: Enable sudo for ThinLinc commands
   ansible.builtin.include_tasks: sudo.yaml
