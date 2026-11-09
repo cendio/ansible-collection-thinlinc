@@ -20,6 +20,16 @@ The following variables are optional:
 |----------|-------------|---------|
 | `desktop_install_recommends` | Install the desktop environment's recommend packages (weak dependencies) | `true` |
 
+## Tags
+
+| Tag | Tasks |
+|-----|-------|
+| `mate` | Install MATE and configure it for remote sessions |
+| `xfce` | Install XFCE and configure it for remote sessions |
+| `firefox` | Replace the Firefox snap with Mozilla's package (Ubuntu) |
+| `screensaver` | Disable the screensaver (MATE) |
+| `compositing` | Disable compositing (MATE) |
+
 ## Dependencies
 
 None.

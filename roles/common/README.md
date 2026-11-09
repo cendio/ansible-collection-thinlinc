@@ -10,6 +10,13 @@ None.
 
 None.
 
+## Tags
+
+| Tag | Tasks |
+|-----|-------|
+| `cups` | Install and enable CUPS |
+| `sudo` | Allow ThinLinc commands through sudo |
+
 ## Dependencies
 
 None.

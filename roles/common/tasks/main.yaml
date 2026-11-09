@@ -1,6 +1,8 @@
 ---
 - name: Install and enable CUPS
-  ansible.builtin.include_tasks: cups.yaml
+  ansible.builtin.import_tasks: cups.yaml
+  tags: [cups]
 
 - name: Enable sudo for ThinLinc commands
-  ansible.builtin.include_tasks: sudo.yaml
+  ansible.builtin.import_tasks: sudo.yaml
+  tags: [sudo]

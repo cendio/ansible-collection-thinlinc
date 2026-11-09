@@ -1,0 +1,16 @@
+---
+- name: Disable screensaver (MATE)
+  ansible.builtin.template:
+    src: mate/disable_screensaver.j2
+    dest: /usr/share/glib-2.0/schemas/org.mate.screensaver.gschema.override
+    mode: '0644'
+  notify: compile_gsettings_schemas
+  tags: [screensaver]
+
+- name: Disable compositing (MATE)
+  ansible.builtin.template:
+    src: mate/disable_compositing.j2
+    dest: /usr/share/glib-2.0/schemas/org.mate.marco.gschema.override
+    mode: '0644'
+  notify: compile_gsettings_schemas
+  tags: [compositing]

@@ -10,6 +10,12 @@ None.
 
 None.
 
+## Tags
+
+| Tag | Tasks |
+|-----|-------|
+| `virtualgl` | Install and configure VirtualGL |
+
 ## Dependencies
 
 None.
