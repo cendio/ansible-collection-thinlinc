@@ -14,6 +14,12 @@ The following variables are required:
 |----------|-------------|---------|
 | `desktop_envs` | List of desktop environments to configure | `["mate", "xfce"]` |
 
+The following variables are optional:
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `desktop_install_recommends` | Install the desktop environment's recommend packages (weak dependencies) | `true` |
+
 ## Dependencies
 
 None.

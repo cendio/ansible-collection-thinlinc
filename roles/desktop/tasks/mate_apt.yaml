@@ -2,6 +2,7 @@
 - name: Install MATE desktop packages
   ansible.builtin.apt:
     name: ubuntu-mate-desktop
+    install_recommends: "{{ desktop_install_recommends }}"
   when: ansible_facts['distribution'] == 'Ubuntu'
 
 # mate-power-manager just crashes on a headless remote session.

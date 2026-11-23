@@ -2,6 +2,7 @@
 - name: Install XFCE desktop packages
   ansible.builtin.apt:
     name: xubuntu-desktop
+    install_recommends: "{{ desktop_install_recommends }}"
   when: ansible_facts['distribution'] == 'Ubuntu'
 
 # Magnus (a desktop magnifier application) has a habit of autostarting

@@ -1,6 +1,7 @@
 - name: Install MATE desktop packages
   ansible.builtin.dnf:
     name: "@MATE Desktop"
+    install_weak_deps: "{{ desktop_install_recommends }}"
   when: ansible_facts['distribution'] == "Fedora"
 
 - name: Enable CRB/EPEL
@@ -89,4 +90,5 @@
       - seahorse
       - seahorse-caja
       - xdg-user-dirs-gtk
+    install_weak_deps: "{{ desktop_install_recommends }}"
   when: ansible_facts['distribution'] != "Fedora"

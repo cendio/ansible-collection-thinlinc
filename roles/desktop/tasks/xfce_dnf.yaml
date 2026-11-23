@@ -8,6 +8,7 @@
   ansible.builtin.dnf:
     name: "@Xfce"
     state: present
+    install_weak_deps: "{{ desktop_install_recommends }}"
 
 # Magnus (a desktop magnifier application) has a habit of autostarting
 # unconditionally on XFCE
