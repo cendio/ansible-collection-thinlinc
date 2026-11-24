@@ -1,15 +1,4 @@
 ---
-- name: Remove Firefox snap
-  community.general.snap:
-    name: firefox
-    state: absent
-
-- name: Remove Firefox transitional package
-  become: true
-  ansible.builtin.apt:
-    name: firefox
-    state: absent
-
 - name: Add Mozilla repository
   ansible.builtin.deb822_repository:
     name: mozilla
@@ -27,12 +16,37 @@
       Package: *
       Pin: origin packages.mozilla.org
       Pin-Priority: 1000
+
+      Package: firefox*
+      Pin: release o=Ubuntu
+      Pin-Priority: -1
     dest: /etc/apt/preferences.d/mozilla
     owner: root
     group: root
     mode: "0644"
 
-- name: Install Firefox
-  ansible.builtin.apt:
-    name: firefox
-    update_cache: true
+# Only replace Firefox if it's already installed as a snap
+- name: Check for Firefox snap
+  ansible.builtin.command: snap list firefox
+  register: desktop_firefox_snap
+  changed_when: false
+  failed_when: false
+  check_mode: false
+
+- name: Replace Firefox snap
+  when: desktop_firefox_snap.rc == 0
+  block:
+    - name: Remove Firefox snap
+      community.general.snap:
+        name: firefox
+        state: absent
+
+    - name: Remove Firefox transitional package
+      ansible.builtin.apt:
+        name: firefox
+        state: absent
+
+    - name: Install Firefox
+      ansible.builtin.apt:
+        name: firefox
+        update_cache: true

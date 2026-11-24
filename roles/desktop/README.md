@@ -26,7 +26,7 @@ The following variables are optional:
 |-----|-------|
 | `mate` | Install MATE and configure it for remote sessions |
 | `xfce` | Install XFCE and configure it for remote sessions |
-| `firefox` | Replace the Firefox snap with Mozilla's package (Ubuntu) |
+| `firefox` | Use Mozilla's Firefox package instead of the snap (Ubuntu) |
 | `screensaver` | Disable the screensaver (MATE) |
 | `compositing` | Disable compositing (MATE) |
 

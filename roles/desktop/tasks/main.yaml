@@ -15,7 +15,7 @@
   loop: "{{ desktop_envs }}"
   tags: [always]
 
-- name: Replace Firefox snap package
+- name: Prefer Mozilla's Firefox package
   ansible.builtin.include_tasks:
     file: firefox.yaml
     apply:
